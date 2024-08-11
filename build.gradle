@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'application'
+    id 'org.graalvm.buildtools.native' version '0.10.2'
+}
+
+group = 'ru.kazov'
+version = '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.json:json:20240303'
+    implementation 'org.yaml:snakeyaml:2.2'
+    implementation 'org.freemarker:freemarker:2.3.33'
+    implementation 'commons-cli:commons-cli:1.8.0'
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+application {
+    mainClass = 'ru.kazov.jyco.Main'
+}
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+}
+
+graalvmNative {
+    binaries.main {
+        resources.autodetect()
+        imageName = "jyco"
+    }
+}
+
+tasks.register('prepareArtifact') {
+    //dependsOn nativeCompile
+    delete(fileTree("${layout.buildDirectory.get()}/native/nativeCompile/") {
+        include("native-image-*")
+    })
+    copy {
+        from "."
+        include "templates/**"
+        include "examples/**"
+        include "Readme.html"
+        into("${layout.buildDirectory.get()}/native/nativeCompile")
+    }
+}

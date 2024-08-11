@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JYCO readme</title>
+    <style>
+        table, th, td {
+            border: 1px solid;
+        }
+
+        code {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1 id="json-and-yaml-converter">Json and Yaml COnverter</h1>
+<p><strong>jyco</strong> is small utility, that helps you to generate files from json or yaml data with templates.</p>
+<p><strong>jyco</strong> works with <a href="https://freemarker.apache.org/">Apache Freemarker</a>. Read <a
+        href="https://freemarker.apache.org/docs/index.html">docs</a> if you want to know how to create templates</p>
+<h2 id="usage">Usage</h2>
+<p><code>jyco -i ./examples/test.json -o test.html -t test-html</code></p>
+<p>Run jyco without parameters to see all available options.</p>
+<h2 id="create-template">Create template</h2>
+<p>All templates should be placed as a subfolder in the <code>templates</code> folder. The main template file should be
+    named <code>index.ftl</code></p>
+<h2 id="data-model">Data model</h2>
+<p>In template you can access to base objects.</p>
+<table style="border: 1px solid;">
+    <thead>
+    <tr>
+        <th>Object</th>
+        <th>Desciption</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>$root</td>
+        <td>Root object from json or yaml. Object or Array</td>
+    </tr>
+    <tr>
+        <td>$template</td>
+        <td>Template name, that used</td>
+    </tr>
+    <tr>
+        <td>$in</td>
+        <td>Input filename</td>
+    </tr>
+    <tr>
+        <td>$type</td>
+        <td>Type of input file (json or yaml)</td>
+    </tr>
+    <tr>
+        <td>$date</td>
+        <td>Date, when conversion is started</td>
+    </tr>
+    </tbody>
+</table>
+<h2 id="author">Author</h2>
+<p>Created for fun by Roman Kazov.</p>
+
+</body>
+</html>
